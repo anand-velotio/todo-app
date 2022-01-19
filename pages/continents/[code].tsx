@@ -33,7 +33,7 @@ export default function Countries({ countries }: CountriesProps) {
       >
         {countries &&
           countries.map((country: Country) => {
-            return <span>{country.name}</span>;
+            return <span key={country.code}>{country.name}</span>;
           })}
       </Flex>
     </>
@@ -64,7 +64,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context: any) => {
   const code = context.params.code;
   const query = gql`
-    query Continent($code: String!) {
+    query Continent($code: ID!) {
       continent(code: $code) {
         countries {
           code
